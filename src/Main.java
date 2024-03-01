@@ -26,6 +26,6 @@ public class Main {
 
         Game game = new Game();
         TextUI ui = new TextUI(game);
-        ui.displayBoard(isCheatMode);
+        ui.show(isCheatMode);
     }
 }
