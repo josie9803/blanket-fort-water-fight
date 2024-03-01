@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Fort {
     private List<Cell> cells;
+    private char fortId;
     private int numOfDamagedCells;
     PolyominoGenerator generator = new PolyominoGenerator();
 
@@ -21,11 +22,20 @@ public class Fort {
         return cells;
     }
 
-    public int getNumOfDamagedCells() {
-        return numOfDamagedCells;
+    public int getNumOfUndamagedCells() {
+        int NUM_OF_CELLS = 5;
+        return NUM_OF_CELLS - numOfDamagedCells;
     }
 
-    public void updateNumOfDamagedCells() {
+    public void setFortId(char fortId) {
+        this.fortId = fortId;
+    }
+
+    public char getFortId() {
+        return fortId;
+    }
+
+    public void increaseNumOfDamagedCellsByOne() {
         this.numOfDamagedCells++;
     }
 }

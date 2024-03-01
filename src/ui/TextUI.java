@@ -18,10 +18,17 @@ public class TextUI {
         }
         displayTitle();
 
-        boolean isDone = false;
-        while (!isDone) {
+        while (!game.isEnd()) {
             displayBoard(false);
             getUserInput();
+        }
+
+        if (game.isUserWin()){
+            System.out.println("Congratulations! You won!");
+        }
+        else{
+            System.out.println("I'm sorry, your fort is all wet! They win!");
+            //TODO: print out the result board
         }
     }
 
@@ -34,8 +41,25 @@ public class TextUI {
             System.out.println("Invalid target. Please enter a coordinate such as D10.");
             getUserInput();
         } else {
-            System.out.println("Check if this is a hit or missed");
+            updateBoardAfterUserMove(coordinate.charAt(0),coordinate.charAt(1));
         }
+    }
+
+    public void updateBoardAfterUserMove(char row, char col){
+        boolean isHit = game.hasShootAtCell(row, col);
+        if (isHit) {
+            System.out.println("HIT!");
+        } else {
+            System.out.println("Miss.");
+        }
+
+        int[] scoreList = game.getAllOpponentsScoreList();
+        for (int i = 0; i < scoreList.length; i++){
+            System.out.println("Opponent #" + i + " of " + GameConfig.getNumberOfForts()
+            + " shot you for " + scoreList[i] + " points!");
+        }
+
+        game.updateOpponentTotalScore();
     }
 
     public void displayBoard(boolean isCheatMode) {
@@ -52,7 +76,7 @@ public class TextUI {
             }
             System.out.println();
         }
-        System.out.printf("Opponents points: 0 / %d.%n", 2500);
+        System.out.printf("Opponents points: " + game.getOpponentTotalScore() + " / %d.%n", 2500);
     }
 
     private void displayTitle() {
@@ -64,7 +88,17 @@ public class TextUI {
 
     private String getDisplayChar(Cell cell, boolean isCheatMode) {
         if (!isCheatMode) {
-            return "  ~";
+            if (!cell.isRevealed()) {
+                return "  ~";
+            }
+            else{
+                if (cell.isHit()){
+                    return "  X";
+                }
+                else{
+                    return "   ";
+                }
+            }
         } else {
             if (!cell.isOccupied()) {
                 return "  .";
