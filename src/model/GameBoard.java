@@ -1,20 +1,24 @@
 package model;
 
 public class GameBoard {
-    public final int BOARD_SIZE = 10;
     private Cell[][] grid;
-    private static FortManager opponents;
 
-    public GameBoard(String arg) {
-        this.grid = new Cell[BOARD_SIZE][BOARD_SIZE];
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
+    public GameBoard(int boardSize) {
+        this.grid = new Cell[boardSize][boardSize];
+        initializeGrid(boardSize);
+    }
+
+    private void initializeGrid(int boardSize) {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
                 char row = (char) ('A' + i);
                 int col = j + 1;
                 grid[i][j] = new Cell(row, col);
             }
         }
-        opponents = new FortManager(Integer.parseInt(arg));
     }
 
+    public Cell[][] getGrid() {
+        return grid;
+    }
 }
