@@ -5,6 +5,8 @@ import java.util.List;
 public class Game {
     private GameBoard board;
     private FortManager fortManager;
+    private int opponentTotalScore = 0;
+    private final int MAXIMUM_SCORE_OF_OPPONENT = 2500;
 
     public Game() {
         this.board = new GameBoard(GameConfig.getBoardSize());
@@ -27,5 +29,65 @@ public class Game {
 
     public GameBoard getBoard() {
         return board;
+    }
+
+    public int getOpponentTotalScore() {
+        return opponentTotalScore;
+    }
+
+    public int[] getAllOpponentsScoreList(){
+        int[] scoreList = new int[fortManager.getFortSize()];
+        int i = 0;
+
+        for (Fort fort : fortManager.getForts()) {
+            int numOfUndamagedCells = fort.getNumOfUndamagedCells();
+            int opponentScore = switch (numOfUndamagedCells) {
+                case 5, 4 -> 20;
+                case 3 -> 5;
+                case 2 -> 2;
+                case 1 -> 1;
+                default -> 0;
+            };
+            scoreList[i++] = opponentScore;
+        }
+
+        return scoreList;
+    }
+
+    public void updateOpponentTotalScore() {
+        for (int j : getAllOpponentsScoreList()) {
+            opponentTotalScore += j;
+        }
+    }
+
+    public boolean hasShootAtCell(char row, char col) {
+        int convertedRow = row - 'A';
+        int convertedCol = col - '0' - 1;
+        Cell cell = board.getGrid()[convertedRow][convertedCol];
+        cell.setRevealed(true);
+        if (cell.isOccupied()) {
+            updateCellStatus(cell);
+            return true;
+        }
+        return false;
+    }
+
+    private void updateCellStatus(Cell cell) {
+        cell.setHit(true);
+        for (Fort fort : fortManager.getForts()) {
+            if (cell.getCellId() == fort.getFortId()) {
+                fort.increaseNumOfDamagedCellsByOne();
+            }
+        }
+    }
+    public boolean isEnd(){
+        return opponentTotalScore == MAXIMUM_SCORE_OF_OPPONENT
+                || fortManager.allFortsDestroyed();
+    }
+    public boolean isUserWin(){
+        if (isEnd()){
+            return fortManager.allFortsDestroyed();
+        }
+        return false;
     }
 }

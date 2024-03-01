@@ -6,11 +6,9 @@ public class FortManager {
     private List<Fort> forts = new ArrayList<>();
     private GameBoard board;
     private char currentCellId = 'A';
-    private int points;
 
     public FortManager(GameBoard board) {
         this.board = board;
-        this.points = 0;
     }
 
     public void initializeForts(int numberOfForts) {
@@ -34,6 +32,7 @@ public class FortManager {
         int startCol = random.nextInt(boardSize);
 
         if (canPlaceFortAt(fort, startRow, startCol)) {
+            fort.setFortId(currentCellId);
             forts.add(fort);
             markFortOnBoard(fort, startRow, startCol, currentCellId);
             currentCellId = (char) (currentCellId + 1);
@@ -74,14 +73,6 @@ public class FortManager {
 
     public List<Fort> getForts() {
         return forts;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void updatePoints() {
-        //TODO
     }
 
     private int calculateDamagedForts() {
