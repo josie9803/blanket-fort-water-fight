@@ -75,6 +75,16 @@ public class FortManager {
         return forts;
     }
 
+    public List<Fort> getAliveForts(){
+        List<Fort> aliveForts = new ArrayList<>();
+        for (Fort fort : forts){
+            if (!fort.isDestroyed()){
+                aliveForts.add(fort);
+            }
+        }
+        return aliveForts;
+    }
+
     private int calculateDamagedForts() {
         int numOfDamagedForts = 0;
         for (Fort fort : forts) {

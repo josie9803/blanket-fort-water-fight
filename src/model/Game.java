@@ -36,10 +36,10 @@ public class Game {
     }
 
     public int[] getAllOpponentsScoreList(){
-        int[] scoreList = new int[fortManager.getFortSize()];
+        int[] scoreList = new int[fortManager.getAliveForts().size()];
         int i = 0;
 
-        for (Fort fort : fortManager.getForts()) {
+        for (Fort fort : fortManager.getAliveForts()) {
             int numOfUndamagedCells = fort.getNumOfUndamagedCells();
             int opponentScore = switch (numOfUndamagedCells) {
                 case 5, 4 -> 20;
@@ -60,9 +60,9 @@ public class Game {
         }
     }
 
-    public boolean hasShootAtCell(char row, char col) {
+    public boolean hasShootAtCell(char row, int col) {
         int convertedRow = row - 'A';
-        int convertedCol = col - '0' - 1;
+        int convertedCol = col - 1;
         Cell cell = board.getGrid()[convertedRow][convertedCol];
         cell.setRevealed(true);
         if (cell.isOccupied()) {
