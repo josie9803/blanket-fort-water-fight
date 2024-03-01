@@ -1,19 +1,20 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Fort {
-    public final int TOTAL_CELLS = 5;
-    private List<Cell> cells = new ArrayList<>();
+    private List<Cell> cells;
     private int numOfDamagedCells;
+    PolyominoGenerator generator = new PolyominoGenerator();
 
-    public Fort(List<Cell> cells) {
-        this.cells = cells;
+    public Fort() {
+        this.cells = generator.generateRandomPolyomino();
         this.numOfDamagedCells = 0;
     }
-    public boolean isDestroyed(){
-        return numOfDamagedCells == TOTAL_CELLS;
+
+    public boolean isDestroyed() {
+        int totalCells = GameConfig.getNumberOfCells();
+        return numOfDamagedCells == totalCells;
     }
 
     public List<Cell> getCells() {
