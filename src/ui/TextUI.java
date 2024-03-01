@@ -24,6 +24,7 @@ public class TextUI {
         }
 
         if (game.isUserWin()){
+            displayBoard(isCheatMode);
             System.out.println("Congratulations! You won!");
         }
         else{
@@ -41,11 +42,13 @@ public class TextUI {
             System.out.println("Invalid target. Please enter a coordinate such as D10.");
             getUserInput();
         } else {
-            updateBoardAfterUserMove(coordinate.charAt(0),coordinate.charAt(1));
+            String extractedCol = coordinate.replaceAll("[^0-9]", "");
+            int numericValue = Integer.parseInt(extractedCol);
+            updateBoardAfterUserMove(coordinate.charAt(0),numericValue);
         }
     }
 
-    public void updateBoardAfterUserMove(char row, char col){
+    public void updateBoardAfterUserMove(char row, int col){
         boolean isHit = game.hasShootAtCell(row, col);
         if (isHit) {
             System.out.println("HIT!");

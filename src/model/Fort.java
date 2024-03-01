@@ -23,8 +23,8 @@ public class Fort {
     }
 
     public int getNumOfUndamagedCells() {
-        int NUM_OF_CELLS = 5;
-        return NUM_OF_CELLS - numOfDamagedCells;
+        int totalCells = GameConfig.getNumberOfCells();
+        return totalCells - numOfDamagedCells;
     }
 
     public void setFortId(char fortId) {
