@@ -18,6 +18,10 @@ public class GameBoard {
         }
     }
 
+    public boolean isWithinGrid(int row, int col) {
+        return row >= 0 && row < GameConfig.getBoardSize() && col >= 0 && col < GameConfig.getBoardSize();
+    }
+
     public Cell[][] getGrid() {
         return grid;
     }

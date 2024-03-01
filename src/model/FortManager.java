@@ -48,7 +48,7 @@ public class FortManager {
             int actualCol = startCol + (fortCell.getCol() - 1);
 
             Cell[][] grid = board.getGrid();
-            if (!isWithinBounds(actualRow, actualCol) || grid[actualRow][actualCol].isOccupied()) {
+            if (!board.isWithinGrid(actualRow, actualCol) || grid[actualRow][actualCol].isOccupied()) {
                 return false;
             }
         }
@@ -60,16 +60,12 @@ public class FortManager {
         for (Cell cell : cells) {
             int actualRow = startRow + (cell.getRow() - 'A');
             int actualCol = startCol + (cell.getCol() - 1);
-            if (isWithinBounds(actualRow, actualCol)) {
+            if (board.isWithinGrid(actualRow, actualCol)) {
                 Cell boardCell = board.getGrid()[actualRow][actualCol];
                 boardCell.setCellId(id);
                 boardCell.setOccupied(true);
             }
         }
-    }
-
-    private boolean isWithinBounds(int row, int col) {
-        return row >= 0 && row < GameConfig.getBoardSize() && col >= 0 && col < GameConfig.getBoardSize();
     }
 
     public int getFortSize() {
