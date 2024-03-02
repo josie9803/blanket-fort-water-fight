@@ -18,7 +18,7 @@ public class FortManager {
         this.board = board;
     }
 
-    public void initializeForts(int numberOfForts) {
+    public boolean initializeForts(int numberOfForts) {
         for (int i = 0; i < numberOfForts; i++) {
             boolean isPlaced = false;
             for (int attempt = 0; attempt < 100 && !isPlaced; attempt++) {
@@ -26,9 +26,10 @@ public class FortManager {
                 isPlaced = hasPlacedFort(newFort);
             }
             if (!isPlaced) {
-                throw new RuntimeException("Could not place all forts.");
+                return false;
             }
         }
+        return true;
     }
 
     private boolean hasPlacedFort(Fort fort) {

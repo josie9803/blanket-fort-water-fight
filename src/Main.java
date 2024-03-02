@@ -30,8 +30,13 @@ public class Main {
             }
         }
 
-        Game game = new Game();
-        TextUI ui = new TextUI(game);
-        ui.show(isCheatMode);
+        try {
+            Game game = new Game();
+            TextUI ui = new TextUI(game);
+            ui.show(isCheatMode);
+        } catch (RuntimeException e) {
+            System.err.printf("Error: Unable to place %s on the board.%n", args[0]);
+            System.err.println("       Try running game again with fewer forts.");
+        }
     }
 }
