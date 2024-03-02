@@ -15,7 +15,7 @@ public class Fort {
 
     public boolean isDestroyed() {
         int totalCells = GameConfig.getNumberOfCells();
-        return numOfDamagedCells == totalCells;
+        return numOfDamagedCells >= totalCells;
     }
 
     public List<Cell> getCells() {

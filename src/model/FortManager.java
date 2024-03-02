@@ -1,6 +1,7 @@
 package model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FortManager {
     private List<Fort> forts = new ArrayList<>();
@@ -67,32 +68,20 @@ public class FortManager {
         }
     }
 
-    public int getFortSize() {
-        return forts.size();
-    }
-
     public List<Fort> getForts() {
         return forts;
     }
 
-    public List<Fort> getAliveForts(){
-        List<Fort> aliveForts = new ArrayList<>();
-        for (Fort fort : forts){
-            if (!fort.isDestroyed()){
-                aliveForts.add(fort);
-            }
-        }
-        return aliveForts;
+    public List<Fort> getAliveForts() {
+        return forts.stream()
+                .filter(fort -> !fort.isDestroyed())
+                .collect(Collectors.toList());
     }
 
     private int calculateDamagedForts() {
-        int numOfDamagedForts = 0;
-        for (Fort fort : forts) {
-            if (fort.isDestroyed()) {
-                numOfDamagedForts++;
-            }
-        }
-        return numOfDamagedForts;
+        return (int) forts.stream()
+                .filter(Fort::isDestroyed)
+                .count();
     }
 
     public boolean allFortsDestroyed() {

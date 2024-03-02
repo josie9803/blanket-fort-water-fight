@@ -35,7 +35,7 @@ public class Game {
         return opponentTotalScore;
     }
 
-    public int[] getAllOpponentsScoreList(){
+    public int[] getAllOpponentsScoreList() {
         int[] scoreList = new int[fortManager.getAliveForts().size()];
         int i = 0;
 
@@ -74,18 +74,18 @@ public class Game {
 
     private void updateCellStatus(Cell cell) {
         cell.setHit(true);
-        for (Fort fort : fortManager.getForts()) {
-            if (cell.getCellId() == fort.getFortId()) {
-                fort.increaseNumOfDamagedCellsByOne();
-            }
-        }
+        fortManager.getForts().stream()
+                .filter(fort -> cell.getCellId() == fort.getFortId())
+                .forEach(Fort::increaseNumOfDamagedCellsByOne);
     }
-    public boolean isEnd(){
+
+    public boolean isEnd() {
         return opponentTotalScore == MAXIMUM_SCORE_OF_OPPONENT
                 || fortManager.allFortsDestroyed();
     }
-    public boolean isUserWin(){
-        if (isEnd()){
+
+    public boolean isUserWin() {
+        if (isEnd()) {
             return fortManager.allFortsDestroyed();
         }
         return false;
