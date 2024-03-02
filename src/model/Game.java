@@ -14,8 +14,14 @@ public class Game {
     public Game() {
         this.board = new GameBoard(GameConfig.getBoardSize());
         this.fortManager = new FortManager(board);
+        initializeGame();
+    }
 
-        fortManager.initializeForts(GameConfig.getNumberOfForts());
+    private void initializeGame() {
+        boolean success = fortManager.initializeForts(GameConfig.getNumberOfForts());
+        if (!success) {
+            throw new RuntimeException("Could not place all forts");
+        }
     }
 
     public boolean isValidCoordinate(String coordinate) {
@@ -67,6 +73,9 @@ public class Game {
         int convertedRow = row - 'A';
         int convertedCol = col - 1;
         Cell cell = board.getGrid()[convertedRow][convertedCol];
+        if (cell.isRevealed()) {
+            return cell.isHit();
+        }
         cell.setRevealed(true);
         if (cell.isOccupied()) {
             updateCellStatus(cell);
@@ -81,7 +90,8 @@ public class Game {
                 .filter(fort -> cell.getCellId() == fort.getFortId())
                 .forEach(Fort::increaseNumOfDamagedCellsByOne);
     }
-    public boolean isEnd(){
+
+    public boolean isEnd() {
         return opponentTotalScore >= MAXIMUM_SCORE_OF_OPPONENT
                 || fortManager.allFortsDestroyed();
     }

@@ -28,10 +28,10 @@ public class TextUI {
             getUserInput();
         }
 
-        if (game.isUserWin()){
+        displayBoard(false);
+        if (game.isUserWin()) {
             System.out.println("Congratulations! You won!");
-        }
-        else{
+        } else {
             System.out.println("I'm sorry, your fort is all wet! They win!");
         }
         displayBoard(true);
@@ -43,17 +43,17 @@ public class TextUI {
         System.out.print("Enter your move: ");
         String coordinate = scanner.nextLine().toUpperCase().trim();
 
-        if (coordinate.isEmpty() || coordinate.contains(" ")|| !game.isValidCoordinate(coordinate)) {
+        if (coordinate.isEmpty() || coordinate.contains(" ") || !game.isValidCoordinate(coordinate)) {
             System.out.println("Invalid target. Please enter a coordinate such as D10.");
             getUserInput();
         } else {
             String extractedCol = coordinate.replaceAll("[^0-9]", "");
             int numericValue = Integer.parseInt(extractedCol);
-            updateBoardAfterUserMove(coordinate.charAt(0),numericValue);
+            updateBoardAfterUserMove(coordinate.charAt(0), numericValue);
         }
     }
 
-    public void updateBoardAfterUserMove(char row, int col){
+    public void updateBoardAfterUserMove(char row, int col) {
         boolean isHit = game.hasShootAtCell(row, col);
         if (isHit) {
             System.out.println("HIT!");
@@ -62,11 +62,10 @@ public class TextUI {
         }
 
         int[] scoreList = game.getAllOpponentsScoreList();
-        for (int i = 0; i < scoreList.length; i++){
-            System.out.println("Opponent #" + i + " of " + GameConfig.getNumberOfForts()
-            + " shot you for " + scoreList[i] + " points!");
+        for (int i = 0; i < scoreList.length; i++) {
+            System.out.println("Opponent #" + (i + 1) + " of " + GameConfig.getNumberOfForts()
+                    + " shot you for " + scoreList[i] + " points!");
         }
-
         game.updateOpponentTotalScore();
     }
 
