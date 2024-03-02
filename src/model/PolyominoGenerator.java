@@ -2,6 +2,10 @@ package model;
 
 import java.util.*;
 
+/**
+ * This class generates random polyomino shapes for later fort placement within defined bounds.
+ */
+
 public class PolyominoGenerator {
     private final char rowStart = 'A';
     private final char rowEnd = 'J';

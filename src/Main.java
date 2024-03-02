@@ -2,6 +2,12 @@ import model.Game;
 import model.GameConfig;
 import ui.TextUI;
 
+/**
+ * This Main class is the entry point for the game.
+ * It parses command-line arguments and check validity for game customization.
+ * It initializes the Game and invokes TextUI to display and handle user interactions.
+ */
+
 public class Main {
     public static void main(String[] args) {
         boolean isCheatMode = false;

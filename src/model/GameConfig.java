@@ -1,5 +1,13 @@
 package model;
 
+/**
+ * GameConfig class manages the game configuration settings.
+ * It provides methods for initializing, accessing and modifying these values:
+ * # of forts, # of cells, and board size.
+ * The class follows singleton pattern for global configuration throughout the game by using
+ * static methods and fields.
+ */
+
 public class GameConfig {
     private static int numberOfForts = 5;
     private static int numberOfCells = 5;

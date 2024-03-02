@@ -1,5 +1,9 @@
 package model;
-
+/**
+ * The Cell class represents a single cell of the Fort.
+ * Each cell has the fields row, col, and id for identifier
+ * The cell also has the fields for tracking its status: isOccupied, isRevealed, isHit
+ */
 public class Cell {
     private char row;
     private int col;

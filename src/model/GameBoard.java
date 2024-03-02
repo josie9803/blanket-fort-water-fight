@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * This class represents the game board with a 2-dimensional grid of cells.
+ * It provides methods for checking a given position validity and accessing the current grid.
+ */
+
 public class GameBoard {
     private Cell[][] grid;
 
