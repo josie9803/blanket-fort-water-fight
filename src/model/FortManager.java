@@ -4,8 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class FortManager {
-    private List<Fort> forts = new ArrayList<>();
-    private GameBoard board;
+    private final List<Fort> forts = new ArrayList<>();
+    private final GameBoard board;
     private char currentCellId = 'A';
 
     public FortManager(GameBoard board) {

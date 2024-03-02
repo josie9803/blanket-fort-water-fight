@@ -24,13 +24,13 @@ public class TextUI {
         }
 
         if (game.isUserWin()){
-            displayBoard(isCheatMode);
             System.out.println("Congratulations! You won!");
         }
         else{
             System.out.println("I'm sorry, your fort is all wet! They win!");
-            //TODO: print out the result board
         }
+        displayBoard(true);
+        System.out.println("(Lower case fort letters are where you shot.)");
     }
 
     public void getUserInput() {
@@ -90,26 +90,18 @@ public class TextUI {
     }
 
     private String getDisplayChar(Cell cell, boolean isCheatMode) {
-        if (!isCheatMode) {
-            if (!cell.isRevealed()) {
-                return "  ~";
-            }
-            else{
-                if (cell.isHit()){
-                    return "  X";
-                }
-                else{
-                    return "   ";
-                }
-            }
-        } else {
+        if (!isCheatMode && !cell.isRevealed()) {
+            return "  ~";
+        }
+
+        if (isCheatMode) {
             if (!cell.isOccupied()) {
-                return "  .";
-            } else if (cell.isHit()) {
-                return "  X";
+                return cell.isRevealed() ? "   " : "  .";
             } else {
-                return "  " + cell.getCellId();
+                return cell.isHit() ? ("  " + cell.getCellId()).toLowerCase() : "  " + cell.getCellId();
             }
         }
+
+        return cell.isHit() ? "  X" : "   ";
     }
 }

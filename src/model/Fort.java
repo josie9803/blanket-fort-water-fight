@@ -3,12 +3,12 @@ package model;
 import java.util.*;
 
 public class Fort {
-    private List<Cell> cells;
+    private final List<Cell> cells;
     private char fortId;
     private int numOfDamagedCells;
-    PolyominoGenerator generator = new PolyominoGenerator();
 
     public Fort() {
+        PolyominoGenerator generator = new PolyominoGenerator();
         this.cells = generator.generateRandomPolyomino();
         this.numOfDamagedCells = 0;
     }

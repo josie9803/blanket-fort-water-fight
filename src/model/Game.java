@@ -1,12 +1,10 @@
 package model;
 
-import java.util.List;
-
 public class Game {
-    private GameBoard board;
-    private FortManager fortManager;
+    private final GameBoard board;
+    private final FortManager fortManager;
     private int opponentTotalScore = 0;
-    private final int MAXIMUM_SCORE_OF_OPPONENT = 2500;
+    private static final int MAXIMUM_SCORE_OF_OPPONENT = 2500;
 
     public Game() {
         this.board = new GameBoard(GameConfig.getBoardSize());
@@ -78,9 +76,8 @@ public class Game {
                 .filter(fort -> cell.getCellId() == fort.getFortId())
                 .forEach(Fort::increaseNumOfDamagedCellsByOne);
     }
-
-    public boolean isEnd() {
-        return opponentTotalScore == MAXIMUM_SCORE_OF_OPPONENT
+    public boolean isEnd(){
+        return opponentTotalScore >= MAXIMUM_SCORE_OF_OPPONENT
                 || fortManager.allFortsDestroyed();
     }
 
