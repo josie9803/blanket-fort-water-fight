@@ -20,16 +20,8 @@ public class Cell {
         return col;
     }
 
-    public void setCol(int col) {
-        this.col = col;
-    }
-
     public char getRow() {
         return row;
-    }
-
-    public void setRow(char row) {
-        this.row = row;
     }
 
     public void setCellId(char cellId) {
