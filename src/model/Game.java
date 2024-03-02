@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * The Game class handles the main logic of the game
+ * It provides methods for player to shoot, updating the scores, and checking win conditions.
+ */
+
 public class Game {
     private final GameBoard board;
     private final FortManager fortManager;

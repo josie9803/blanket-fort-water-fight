@@ -4,6 +4,11 @@ import model.*;
 
 import java.util.Scanner;
 
+/**
+ * The TextUI class is responsible for handling user interactions.
+ * It displays game state, accepts user input, and provides updates during gameplay.
+ */
+
 public class TextUI {
     private Game game;
 

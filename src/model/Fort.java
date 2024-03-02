@@ -2,6 +2,12 @@ package model;
 
 import java.util.*;
 
+/**
+ * The Fort class represents a fortress in the game, formed by 5 cells in Polyomino shape.
+ * It keeps track of its status by keeping track of # damaged cells
+ * Also has an id for identifier.
+ */
+
 public class Fort {
     private final List<Cell> cells;
     private char fortId;

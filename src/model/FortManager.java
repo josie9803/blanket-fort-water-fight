@@ -3,6 +3,12 @@ package model;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * The FortManager class manages all Forts' placement and status in the game:
+ * The class utilizes the GameBoard to strategically place and track forts.
+ * It provides methods for initializing, checking, and retrieving the forts.
+ */
+
 public class FortManager {
     private final List<Fort> forts = new ArrayList<>();
     private final GameBoard board;
